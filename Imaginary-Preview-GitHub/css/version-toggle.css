@@ -1,0 +1,33 @@
+/* Version switch — small frosted pill pinned to the bottom-left of the screen
+   (inside the page column on wide screens). Presentation aid, not part of the design. */
+.version-toggle {
+  position: fixed;
+  left: max(1.2rem, calc(50% - 22.5rem + 1.2rem));
+  bottom: calc(1.2rem + env(safe-area-inset-bottom, 0px));
+  z-index: 90;
+  display: flex;
+  padding: 0.3rem;
+  gap: 0.2rem;
+  border-radius: 99rem;
+  background: rgba(0, 0, 0, 0.35);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  font-size: 1.1rem;
+  line-height: 1rem;
+  letter-spacing: 0.02rem;
+  text-transform: uppercase;
+}
+.version-toggle a {
+  min-width: 2.6rem;
+  padding: 0.8rem 0;
+  text-align: center;
+  border-radius: 99rem;
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.version-toggle a:hover { color: #fff; }
+.version-toggle a[aria-current="true"] { background: #fff; color: #000; }

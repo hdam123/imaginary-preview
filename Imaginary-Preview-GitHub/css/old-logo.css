@@ -1,0 +1,19 @@
+/* ==========================================================================
+   Original-logo version — loaded only by the pages in /old-logo/, after
+   styles.css. Swaps the spaced-out IMAG/NARY wordmark for the original bold
+   logo at its original Figma sizes; nothing else differs.
+   ========================================================================== */
+
+/* Homepage hero: "ALL THE BEST BRANDS START" + logo (Figma 3185:491) */
+.h-hero__tag img.logo-classic {
+  width: 12.0229rem;
+  height: 1.5549rem;
+  margin: 0.088rem auto 0;
+  object-fit: fill;
+}
+
+/* Menu bar, compact scroll-up bar, and the top-left mark on Team / Portfolio
+   (Figma 3185:606 / 3185:627: 100.518 x 13 at left 20, top 30) */
+.wordmark { width: 10.0518rem; height: 1.3rem; }
+.wordmark img { object-fit: fill; }
+.intro__wordmark img { filter: none; }   /* black artwork already; no inversion */
