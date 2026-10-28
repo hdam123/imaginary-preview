@@ -14,7 +14,6 @@
     lastFocus = document.activeElement;
     menu.classList.add("is-open");
     menu.setAttribute("aria-hidden", "false");
-    document.body.classList.add("is-locked");
     document.querySelectorAll("[data-menu-open]").forEach((b) => b.setAttribute("aria-expanded", "true"));
     // Move focus into the menu for keyboard users only (no focus ring after a tap)
     if (viaKeyboard) setTimeout(() => menu.querySelector(".menu__close")?.focus({ preventScroll: true }), 50);
@@ -24,15 +23,28 @@
     if (!menu || !menu.classList.contains("is-open")) return;
     menu.classList.remove("is-open");
     menu.setAttribute("aria-hidden", "true");
-    document.body.classList.remove("is-locked");
     document.querySelectorAll("[data-menu-open]").forEach((b) => b.setAttribute("aria-expanded", "false"));
     lastFocus?.focus?.({ preventScroll: true });
   }
 
   document.querySelectorAll("[data-menu-open]").forEach((b) => b.addEventListener("click", openMenu));
   menu?.querySelector(".menu__close")?.addEventListener("click", closeMenu);
-  menu?.querySelector(".menu__catch")?.addEventListener("click", closeMenu);
+  // A tap outside the bar closes the menu (and does nothing else); scrolling leaves it open
+  document.addEventListener("click", (e) => {
+    if (!menu?.classList.contains("is-open") || e.target.closest(".menu__panel")) return;
+    e.preventDefault();
+    e.stopPropagation();
+    closeMenu();
+  }, true);
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMenu(); });
+  // Version B: the menu closes as soon as the visitor scrolls (version A keeps it open)
+  if (document.documentElement.dataset.version === "old") {
+    let openedAt = 0;
+    document.querySelectorAll("[data-menu-open]").forEach((b) => b.addEventListener("click", () => { openedAt = window.scrollY; }));
+    window.addEventListener("scroll", () => {
+      if (menu?.classList.contains("is-open") && Math.abs(window.scrollY - openedAt) > 8) closeMenu();
+    }, { passive: true });
+  }
 
   /* ---------- Links: same-page anchors scroll, other pages fade out ---------- */
   function samePage(url) {

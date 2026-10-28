@@ -117,8 +117,8 @@ html.is-leaving .page { opacity: 0; transition: opacity 0.35s ease; }
 
 /* Expanded menu */
 .menu { position: fixed; inset: 0; z-index: 100; pointer-events: none; }
-.menu.is-open { pointer-events: auto; }
-.menu__catch { position: absolute; inset: 0; }   /* tap outside the bar to close */
+.menu.is-open .menu__panel { pointer-events: auto; }   /* only the bar takes touches: the page keeps scrolling underneath */
+.menu__catch { display: none; }
 
 .menu__panel {
   position: absolute;
