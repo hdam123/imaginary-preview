@@ -307,10 +307,11 @@ html.is-leaving .page { opacity: 0; transition: opacity 0.35s ease; }
   left: 2rem;
   width: 40.9773rem;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(6, 1fr);   /* 3 tiles a row, each spanning 2 — lets a short last row sit centred */
   grid-auto-rows: 9rem;
 }
 .logo-cell {
+  grid-column: span 2;
   position: relative;
   display: flex;
   align-items: center;
@@ -326,13 +327,13 @@ html.is-leaving .page { opacity: 0; transition: opacity 0.35s ease; }
 }
 .logo-cell::after { top: var(--gap-at-cross); bottom: var(--gap-at-cross); right: 0; width: 1px; }
 .logo-cell::before { left: var(--gap-at-cross); right: var(--gap-at-cross); bottom: 0; height: 1px; }
-/* each logo links to the company's site: a quiet fade on hover, no movement */
-.logo img { transition: opacity 0.3s ease; }
-.logo-cell:hover .logo img, .logo-cell:focus-visible .logo img { opacity: 0.5; }
-.logo-cell:focus { outline: none; }
-.logo-cell:focus-visible { outline: 1px solid rgba(0, 0, 0, 0.3); outline-offset: -0.6rem; }
-.logo-cell:nth-child(3n)::after { display: none; }            /* no outer right edge */
-.logo-cell:nth-last-child(-n + 3)::before { display: none; }  /* no outer bottom edge */
+.logo-cell:nth-child(3n)::after,
+.logo-cell:last-child::after { display: none; }                /* no outer right edge (incl. a short last row) */
+/* a last row of two is centred */
+.logo-cell:nth-child(3n + 1):nth-last-child(2) { grid-column: 2 / span 2; }
+/* no outer bottom edge: only the tiles in the actual last row drop their line */
+.logo-cell:nth-child(3n + 1):nth-last-child(-n + 3)::before,
+.logo-cell:nth-child(3n + 1):nth-last-child(-n + 3) ~ .logo-cell::before { display: none; }
 .logo { position: relative; flex-shrink: 0; overflow: hidden; mix-blend-mode: multiply; }
 .logo img { position: absolute; max-width: none; } /* logos are black-on-transparent files (assets/logos/black) */
 .logo .fit-cover { inset: 0; width: 100%; height: 100%; object-fit: cover; }
@@ -346,7 +347,10 @@ html.is-leaving .page { opacity: 0; transition: opacity 0.35s ease; }
 .h-logos__all {
   position: absolute;
   top: 60.5rem;   /* 45px of air above and below */
-  right: 11.2rem;
+  left: 0;
+  right: 0;
+  width: fit-content;
+  margin-inline: auto;   /* centred, whatever the label length */
   font-size: 1.4rem;
   line-height: 1.7rem;
   text-transform: uppercase;
@@ -379,7 +383,8 @@ html.is-leaving .page { opacity: 0; transition: opacity 0.35s ease; }
 /* ==========================================================================
    TEAM (Figma 3273:829)
    ========================================================================== */
-.t-intro .intro__text { top: 15.2rem; left: 6.7379rem; width: 31.5243rem; }
+.t-intro { height: 28rem; }   /* less air around the opening sentence */
+.t-intro .intro__text { top: 11rem; left: 6.7379rem; width: 31.5243rem; }
 
 .t-photo { position: relative; height: 29.8rem; overflow: hidden; background: #fff; }
 .t-photo img {
@@ -455,7 +460,7 @@ html.is-leaving .page { opacity: 0; transition: opacity 0.35s ease; }
 
 .t-quote {
   position: relative;
-  height: 40rem;
+  height: 28rem;
   background: #fff;
   display: flex;
   align-items: center;
@@ -476,13 +481,14 @@ html.is-leaving .page { opacity: 0; transition: opacity 0.35s ease; }
 /* ==========================================================================
    PORTFOLIO (Figma 3273:1189)
    ========================================================================== */
-.p-intro .intro__text { top: 15.2rem; left: 4.8092rem; width: 35.3816rem; }
+.p-intro { height: 31rem; }   /* shorter than the Team intro: less air around the sentence */
+.p-intro .intro__text { top: 11rem; left: 4.8092rem; width: 35.3816rem; }
 
-/* Featured companies — eight full-width strips */
-.feature { position: relative; height: 20rem; overflow: hidden; background: #fff; }
+/* Featured companies — seven full-width strips */
+.feature { position: relative; height: 15rem; overflow: hidden; background: #fff; }
 .feature--red { background: #bf5252; }
 .feature--deep { background: #974242; }
-.feature__media { position: absolute; overflow: hidden; }
+.feature__media { position: absolute; overflow: hidden; margin-top: -2.5rem; }   /* crops were set for 20rem strips: keep them centred in 15rem */
 .feature__media img {
   position: absolute;
   inset: 0;
@@ -497,7 +503,7 @@ html.is-leaving .page { opacity: 0; transition: opacity 0.35s ease; }
 .feature.is-in .feature__media img { transform: none; }
 .feature__label {
   position: absolute;
-  top: 8.8rem;
+  top: 6.3rem;
   font-size: 2rem;
   line-height: 2rem;
   letter-spacing: -0.02rem;
@@ -569,6 +575,7 @@ html.is-leaving .page { opacity: 0; transition: opacity 0.35s ease; }
 .p-card__thumb img { position: absolute; max-width: none; }
 .p-card__thumb img.cover { inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .p-card__name { font-size: 1.4rem; line-height: 1.4rem; letter-spacing: -0.014rem; text-transform: uppercase; color: #000; }
+.p-card__status { margin-top: -0.2rem; font-size: 1.4rem; line-height: 1.4rem; letter-spacing: -0.014rem; text-transform: uppercase; color: var(--muted); }
 .p-empty { grid-column: 1 / -1; font-size: 1.4rem; line-height: 1.4rem; text-transform: uppercase; color: var(--muted); }
 
 /* ==========================================================================

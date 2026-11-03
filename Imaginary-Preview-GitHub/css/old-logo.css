@@ -37,3 +37,68 @@
 /* dark artwork on a white ground: invert, then screen so the ground drops out */
 .feature__logo--screen { mix-blend-mode: screen; }
 .feature__logo--screen img { filter: grayscale(1) invert(1) contrast(1.4); }
+
+/* Portfolio (version B): Category / Status sit at the top, just before the
+   featured strips, and the companies fill a full-bleed two-column grid — no
+   margins or gutters — each with its logo in white over the photo. */
+.p-intro { height: 27rem; }
+.p-filterbar { position: relative; background: #fff; padding: 0 2rem 3rem; overflow-anchor: none; }
+.p-list--stack { padding: 0; }
+.p-list--stack .p-grid { grid-template-columns: repeat(2, 1fr); gap: 0; margin-top: 0; }
+.p-list--stack .p-card { gap: 0; }
+.p-list--stack .p-card__name { display: none; }   /* the logo (with its alt text) replaces it */
+.p-list--stack .p-card__thumb { background: #1b1b1b; }
+.p-list--stack .p-card__thumb::after {             /* a light scrim so white logos read on bright photos */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.18);
+}
+.p-card__logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+}
+.p-list--stack .p-card__logo img {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+.p-card__wordmark {                                 /* fallback while a company has no logo file */
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1.6rem;
+  font-size: 1.4rem;
+  line-height: 1.6rem;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+}
+.p-list--stack .p-empty { padding: 4rem 2rem 6rem; }
+
+/* Exited companies: a small diagonal ribbon across the bottom-right corner */
+.p-card__ribbon {
+  position: absolute;
+  right: -2.8rem;
+  bottom: 1.2rem;
+  z-index: 2;
+  width: 10rem;
+  padding: 0.35rem 0;
+  transform: rotate(-45deg);
+  background: #fff;
+  color: #000;
+  font-size: 0.9rem;
+  line-height: 1rem;
+  letter-spacing: 0.08rem;
+  text-align: center;
+  text-transform: uppercase;
+  pointer-events: none;
+}

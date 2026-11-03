@@ -1,4 +1,4 @@
-/* IMAGINARY — Portfolio: Category / Status dropdowns + two-column company grid
+/* IMAGINARY — Portfolio: Category dropdown + two-column company grid
    (Figma 3273:677 closed, 3273:1017 Category open) */
 (() => {
   // Order as in the open Category panel (3273:1073)
@@ -14,10 +14,10 @@
     "4-Wall",
     "Software and Enablement",
   ];
-  const STATUSES = ["Current", "Exited"];
 
-  // Names, images, crops and Exited flags follow the Figma grid (3273:1032),
-  // plus the featured companies that weren't in it (using their featured photos).
+  // Names, images and crops follow the Figma grid (3273:1032), plus the featured
+  // companies that weren't in it (using their featured photos).
+  // `exited` marks the company as Exited on its card.
   // `crop` = left/top/width/height in % of the thumbnail window.
   // Categories are a best-guess mapping: Figma doesn't define one.
   const C = (name, img, cats, extra = {}) => ({ name, img, cats, ...extra });
@@ -71,8 +71,65 @@
     C("WESTMAN ATELIER", "featured/westman.jpg", ["Beauty & Personal Care"]),
   ];
 
+  // Version B shows the companies as full-bleed tiles with the logo over the photo.
+  // Logo files (assets/logos/tiles) are black on transparent and shown white by CSS;
+  // `ar` corrects the few source files that are stored stretched.
+  const LOGOS = {
+    "10beauty": "10beauty.svg",
+    "alec’s ice cream": "alecs.png",
+    "AYOH": "ayoh.svg",
+    "BATH HOUSE": "bathhouse.png",
+    "BERO": "bero.png",
+    "BLACK CROW AI": "black-crow-ai.svg",
+    "BUILDER": "builder.svg",
+    "CAFETERIA": "cafeteria.svg",
+    "CANN": "cann.png",
+    "CEREBELLY": "cerebelly.svg",
+    "DAILY HARVEST": "daily-harvest.svg",
+    "DAVID": "david.png",
+    "DUOS": "duos.png",
+    "EON": "eon.svg",
+    "FARFETCH": "farfetch.svg",
+    "GENIUS AI": "../genius-ai.svg",
+    "GLOSSIER": "glossier.png",
+    "GOOD AMERICAN": "good-american.svg",
+    "HALF MAGIC": "half-magic.svg",
+    "HOOK MEDIA": "hook-media.svg",
+    "HUM NUTRITION": "hum.png",
+    "KHY": "khy.svg",
+    "KOREAN BROS": "korean-bros.png",
+    "LORE": "lore.svg",
+    "LUCKY BEVERAGE": "lucky-beverage.png",
+    "MEJURI": "mejuri.png",
+    "MILÁ": "mila-v2.png",
+    "nanos": "nanos.png",
+    "NÉCESSAIRE": "../necessaire.svg",
+    "NORDIC KNOTS": "nordic.png",
+    "NUORDER": "nuorder.svg",
+    "PEPPER (POMEGRANATE TECH)": "pepper.svg",
+    "point of view": { src: "pov.png", ar: 6.21 },
+    "reale actives": "reale.png",
+    "reformation": "reformation.svg",
+    "RETRO (LONE PALM LABS)": "retro.png",
+    "santo taco": "santo-taco.svg",
+    "shiftsmart": "shiftsmart.png",
+    "SKIMS": "skims.png",
+    "smalls": "smalls.svg",
+    "SUNDAYS": "sundays.png",
+    "SWORL": "sworl.svg",
+    "thefeed.com": { src: "thefeed.png", ar: 5.1 },
+    "thirty madison (keeps)": "keeps.svg",
+    "universal standard": "universal-standard.svg",
+    "WESTMAN ATELIER": "westman.png",
+  };
+  const stacked = document.documentElement.dataset.version === "old";
+
   const grid = document.querySelector(".p-grid");
   const list = document.querySelector(".p-list");
+  // the Category bar: its own section above the featured strips in
+  // version B, inside the list in version A
+  const bar = document.querySelector(".p-filterbar") || list;
+  const featured = document.querySelector(".p-featured");
   const reduce = window.Imaginary?.reduceMotion;
   const esc = (s) => s.replace(/&/g, "&amp;");
   // grid thumbnails live in assets/thumbs; featured companies reuse their featured photo
@@ -90,12 +147,40 @@
         img = `<img class="cover" src="${src(co.img)}" alt="" loading="lazy" decoding="async"${pos}>`;
       }
     }
+    let mark = "";
+    if (stacked) {
+      const l = LOGOS[co.name];
+      const logo = typeof l === "string" ? { src: l } : l;
+      mark = logo
+        ? `<div class="p-card__logo"${logo.ar ? ` data-ar="${logo.ar}"` : ""}><img src="assets/logos/tiles/${logo.src}" alt="${esc(co.name)}" decoding="async"></div>`
+        : `<p class="p-card__wordmark">${esc(co.name)}</p>`;
+      // version B: a small diagonal ribbon in the corner of exited companies
+      if (co.exited) mark += '<span class="p-card__ribbon">Exited</span>';
+    }
+    // version A: a grey "Exited" line under the name
+    const status = !stacked && co.exited ? '<p class="p-card__status">Exited</p>' : "";
     return `<article class="p-card" data-i="${i}">
-      <div class="p-card__thumb">${img}</div>
-      <p class="p-card__name">${esc(co.name)}</p>
+      <div class="p-card__thumb">${img}${mark}</div>
+      <p class="p-card__name">${esc(co.name)}</p>${status}
     </article>`;
   }).join("") + '<p class="p-empty" hidden>No companies match these filters yet</p>';
   const cards = [...grid.querySelectorAll(".p-card")];
+
+  // Size each logo by its proportions so wide wordmarks and square marks read
+  // at a similar visual weight: width grows with the square root of the aspect.
+  const sizeLogo = (box) => {
+    const im = box.querySelector("img");
+    const ar = +box.dataset.ar || im.naturalWidth / im.naturalHeight;
+    if (!ar) return;
+    const w = Math.min(15, 4.4 * Math.sqrt(ar));
+    box.style.width = `${w}rem`;
+    box.style.height = `${w / ar}rem`;
+  };
+  grid.querySelectorAll(".p-card__logo").forEach((box) => {
+    const im = box.querySelector("img");
+    if (im.complete && im.naturalWidth) sizeLogo(box);
+    else im.addEventListener("load", () => sizeLogo(box), { once: true });
+  });
   const empty = grid.querySelector(".p-empty");
   cards.forEach((c) => c.addEventListener("animationend", () => c.classList.remove("is-entering")));
 
@@ -107,10 +192,9 @@
     ).join("");
   };
   fill(document.querySelector("#panel-category .p-chips"), CATEGORIES, "category");
-  fill(document.querySelector("#panel-status .p-chips"), STATUSES, "status");
 
   const toggles = [...document.querySelectorAll(".p-toggle")];
-  const panels = { category: document.getElementById("panel-category"), status: document.getElementById("panel-status") };
+  const panels = { category: document.getElementById("panel-category") };
 
   function openPanel(name) {
     for (const t of toggles) {
@@ -118,14 +202,14 @@
       t.setAttribute("aria-expanded", String(on));
       panels[t.dataset.panel].classList.toggle("is-open", on);
     }
-    list.classList.toggle("has-open", !!name);
+    bar.classList.toggle("has-open", !!name);
   }
   toggles.forEach((t) => t.addEventListener("click", () => {
     openPanel(t.getAttribute("aria-expanded") === "true" ? null : t.dataset.panel);
   }));
 
-  /* ---------- Filtering (one category + one status, combined) ---------- */
-  const filter = { category: null, status: null };
+  /* ---------- Filtering (one category at a time) ---------- */
+  const filter = { category: null };
 
   function apply() {
     document.querySelectorAll(".chip").forEach((c) => {
@@ -150,8 +234,7 @@
     cards.forEach((card) => {
       const co = COMPANIES[+card.dataset.i];
       const okCat = !filter.category || co.cats.includes(filter.category);
-      const okStatus = !filter.status || (filter.status === "Exited" ? !!co.exited : !co.exited);
-      const match = okCat && okStatus;
+      const match = okCat;
       card.hidden = !match;
       card.classList.remove("is-entering");
       if (match) {
@@ -164,13 +247,15 @@
       }
     });
     empty.hidden = shown > 0;
+    // version B: while a filter is set, the matching tiles follow the bar directly
+    if (bar !== list && featured) featured.hidden = !!filter.category;
 
-    // if the top of the list has scrolled away, bring it back into view
-    const top = list.getBoundingClientRect().top;
+    // if the filters have scrolled away, bring them back into view
+    const top = bar.getBoundingClientRect().top;
     if (top < 0) window.scrollTo({ top: window.scrollY + top, behavior: reduce ? "auto" : "smooth" });
   }
 
-  list.addEventListener("click", (e) => {
+  bar.addEventListener("click", (e) => {
     const chip = e.target.closest(".chip");
     if (!chip) return;
     const { key, value } = chip.dataset; // dataset decodes &amp; back to &
