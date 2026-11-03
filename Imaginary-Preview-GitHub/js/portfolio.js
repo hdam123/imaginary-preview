@@ -15,60 +15,60 @@
     "Software and Enablement",
   ];
 
-  // Names, images and crops follow the Figma grid (3273:1032), plus the featured
+  // Names, images and crops follow the Figma grid (3336:471), plus the featured
   // companies that weren't in it (using their featured photos).
   // `exited` marks the company as Exited on its card.
   // `crop` = left/top/width/height in % of the thumbnail window.
   // Categories are a best-guess mapping: Figma doesn't define one.
   const C = (name, img, cats, extra = {}) => ({ name, img, cats, ...extra });
   const COMPANIES = [
-    C("10beauty", "t0.jpg", ["Beauty & Personal Care"]),
-    C("alec’s ice cream", "t1.jpg", ["Food & Beverage"]),
-    C("AYOH", "t2.jpg", ["Food & Beverage"]),
-    C("BATH HOUSE", "t3.jpg", ["Health & Wellness", "4-Wall"], { crop: [-64.02, -53.09, 228.05, 190.2] }),
-    C("BERO", "featured/bero.jpg", ["Food & Beverage"]),
-    C("BLACK CROW AI", "t4.jpg", ["Software and Enablement"], { crop: [0, -5.23, 100, 187.5] }),
-    C("BUILDER", "t5.jpg", ["Software and Enablement"]),
-    C("CAFETERIA", "t6.jpg", ["Consumer Internet"]),
-    C("CANN", "t7.jpg", ["Food & Beverage"]),
-    C("CEREBELLY", "t8.png", ["Food & Beverage", "Health & Wellness"]),
-    C("DAILY HARVEST", "t9.jpg", ["Food & Beverage"], { exited: true }),
-    C("DAVID", "featured/david.png", ["Food & Beverage", "Health & Wellness"], { pos: "88% 50%" }),
-    C("DUOS", "t10.png", ["Health & Wellness"], { exited: true }),
+    C("10beauty", "grid/p0.jpg", ["Beauty & Personal Care"]),
+    C("alec’s ice cream", "grid/p1.jpg", ["Food & Beverage"]),
+    C("AYOH", "grid/p2.jpg", ["Food & Beverage"]),
+    C("BATH HOUSE", "grid/p3.jpg", ["Health & Wellness", "4-Wall"], { crop: [-24.52, -4.25, 144.54, 120.55] }),
+    C("BERO", "grid/p4.jpg", ["Food & Beverage"]),
+    C("BLACK CROW AI", "grid/p5.jpg", ["Software and Enablement"], { crop: [0, -5.23, 100, 187.5] }),
+    C("BUILDER", "grid/p6.jpg", ["Software and Enablement"]),
+    C("CAFETERIA", "grid/p7.jpg", ["Consumer Internet"]),
+    C("CANN", "grid/p8.jpg", ["Food & Beverage"]),
+    C("CEREBELLY", "grid/p9.jpg", ["Food & Beverage", "Health & Wellness"]),
+    C("DAILY HARVEST", "grid/p10.jpg", ["Food & Beverage"], { exited: true, crop: [-4.36, -4.6, 108.53, 109.12] }),
+    C("DAVID", "grid/p11.jpg", ["Food & Beverage", "Health & Wellness"], { crop: [-32.06, -72.29, 163.8, 292.5] }),
+    C("DUOS", "grid/p12.png", ["Health & Wellness"], { exited: true }),
     C("EON", null, ["Software and Enablement"]),
-    C("FARFETCH", "t11.jpg", ["Luxury", "Apparel & Accessories"], { exited: true }),
-    C("GENIUS AI", "featured/glossgenius.jpg", ["Software and Enablement"]),
-    C("GLOSSIER", "t12.png", ["Beauty & Personal Care"], { crop: [-0.45, -35.33, 100, 206.35] }),
-    C("GOOD AMERICAN", "t13.jpg", ["Apparel & Accessories"]),
-    C("GOOSE HOLDINGS", "t14.jpg", ["4-Wall"]),
-    C("HALF MAGIC", "t15.png", ["Beauty & Personal Care"]),
-    C("HOOK MEDIA", "t16.png", ["Consumer Internet"]),
-    C("HUM NUTRITION", "t17.png", ["Health & Wellness"]),
-    C("KHY", "t18.jpg", ["Apparel & Accessories"], { crop: [-3.94, -6.64, 107.87, 168.55] }),
-    C("KOREAN BROS", "t19.png", ["Food & Beverage"], { crop: [-16.19, -10.29, 132.38, 120.57] }),
-    C("LORE", "t20.jpg", ["Beauty & Personal Care"], { crop: [0, -34.52, 100, 156.25] }),
-    C("LUCKY BEVERAGE", "t21.jpg", ["Food & Beverage"]),
-    C("MEJURI", "t22.jpg", ["Apparel & Accessories", "Luxury"]),
-    C("MILÁ", "t23.jpg", ["Food & Beverage"]),
-    C("nanos", "t24.jpg", ["Pet"]),
-    C("NÉCESSAIRE", "t25.jpg", ["Beauty & Personal Care"]),
-    C("NORDIC KNOTS", "featured/nordic.jpg", ["Home"]),
-    C("NUORDER", "t26.png", ["Software and Enablement"], { exited: true, crop: [-11.01, -17.2, 119.88, 117.37] }),
-    C("PEPPER (POMEGRANATE TECH)", null, ["Software and Enablement"]),
-    C("point of view", "t27.jpg", ["Health & Wellness"]),
-    C("reale actives", "t28.jpg", ["Beauty & Personal Care"], { crop: [-18.21, -14.73, 132.7, 124.6] }),
-    C("reformation", "t29.png", ["Apparel & Accessories"], { exited: true }),
-    C("RETRO (LONE PALM LABS)", "t30.png", ["Consumer Internet"]),
-    C("santo taco", "t31.jpg", ["Food & Beverage", "4-Wall"]),
-    C("shiftsmart", "t32.jpg", ["Software and Enablement"], { crop: [0, -0.64, 100, 109.52] }),
-    C("SKIMS", "featured/skims.jpg", ["Apparel & Accessories"]),
-    C("smalls", "t33.png", ["Pet"]),
-    C("SUNDAYS", "featured/sundays.png", ["Pet"]),
-    C("SWORL", "t34.jpg", ["Food & Beverage"]),
-    C("thefeed.com", "t35.png", ["Health & Wellness"]),
-    C("thirty madison (keeps)", "t36.jpg", ["Health & Wellness"], { exited: true }),
-    C("universal standard", "t37.jpg", ["Apparel & Accessories"]),
-    C("WESTMAN ATELIER", "featured/westman.jpg", ["Beauty & Personal Care"]),
+    C("FARFETCH", "grid/p13.jpg", ["Luxury", "Apparel & Accessories"], { exited: true }),
+    C("GENIUS AI", "grid/p14.jpg", ["Software and Enablement"]),
+    C("GLOSSIER", "grid/p15.png", ["Beauty & Personal Care"], { crop: [-3.12, -87.98, 100, 206.35] }),
+    C("GOOD AMERICAN", "grid/p16.jpg", ["Apparel & Accessories"]),
+    C("GOOSE HOLDINGS", "grid/p17.jpg", ["4-Wall"]),
+    C("HALF MAGIC", "grid/p18.jpg", ["Beauty & Personal Care"]),
+    C("HOOK MEDIA", "grid/p19.jpg", ["Consumer Internet"]),
+    C("HUM NUTRITION", "grid/p20.jpg", ["Health & Wellness"]),
+    C("KHY", "grid/p21.jpg", ["Apparel & Accessories"], { crop: [-3.94, -6.64, 107.87, 168.55] }),
+    C("KOREAN BROS", "grid/p22.jpg", ["Food & Beverage"], { crop: [-16.19, -10.29, 132.38, 120.57] }),
+    C("LORE", "grid/p23.jpg", ["Beauty & Personal Care"], { crop: [0, -34.52, 100, 156.25] }),
+    C("LUCKY BEVERAGE", "grid/p24.jpg", ["Food & Beverage"]),
+    C("MEJURI", "grid/p25.jpg", ["Apparel & Accessories", "Luxury"]),
+    C("MILÁ", "grid/p26.jpg", ["Food & Beverage"]),
+    C("nanos", "grid/p27.jpg", ["Pet"]),
+    C("NÉCESSAIRE", "grid/p28.jpg", ["Beauty & Personal Care"]),
+    C("NORDIC KNOTS", "grid/p29.png", ["Home"]),
+    C("NUORDER", "grid/p30.jpg", ["Software and Enablement"], { exited: true, crop: [-11.01, -17.2, 119.88, 117.37] }),
+    C("PEPPER (POMEGRANATE TECH)", "grid/p31.jpg", ["Software and Enablement"], { crop: [0.02, -7.93, 146.54, 117.75] }),
+    C("point of view", "grid/p32.jpg", ["Health & Wellness"]),
+    C("reale actives", "grid/p33.jpg", ["Beauty & Personal Care"], { crop: [-18.21, -14.73, 132.7, 124.6] }),
+    C("reformation", "grid/p34.jpg", ["Apparel & Accessories"], { exited: true }),
+    C("RETRO (LONE PALM LABS)", "grid/p35.png", ["Consumer Internet"]),
+    C("santo taco", "grid/p36.jpg", ["Food & Beverage", "4-Wall"]),
+    C("shiftsmart", "grid/p37.jpg", ["Software and Enablement"], { crop: [0, -0.64, 100, 109.52] }),
+    C("SKIMS", "grid/p38.png", ["Apparel & Accessories"]),
+    C("smalls", "grid/p39.jpg", ["Pet"]),
+    C("SUNDAYS", "grid/p40.jpg", ["Pet"]),
+    C("SWORL", "grid/p41.jpg", ["Food & Beverage"]),
+    C("thefeed.com", "grid/p42.jpg", ["Health & Wellness"]),
+    C("thirty madison (keeps)", "grid/p43.jpg", ["Health & Wellness"], { exited: true }),
+    C("universal standard", "grid/p44.jpg", ["Apparel & Accessories"]),
+    C("WESTMAN ATELIER", "grid/p45.jpg", ["Beauty & Personal Care"], { crop: [-3.97, -10.41, 108, 129.79] }),
   ];
 
   // Version B shows the companies as full-bleed tiles with the logo over the photo.
@@ -132,7 +132,7 @@
   const featured = document.querySelector(".p-featured");
   const reduce = window.Imaginary?.reduceMotion;
   const esc = (s) => s.replace(/&/g, "&amp;");
-  // grid thumbnails live in assets/thumbs; featured companies reuse their featured photo
+  // grid images live in assets/grid (from Figma 3336:471)
   const src = (img) => (img.includes("/") ? `assets/${img}` : `assets/thumbs/${img}`);
 
   /* ---------- Grid ---------- */
