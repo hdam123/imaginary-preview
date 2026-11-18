@@ -17,63 +17,66 @@
 
   // Names, images and crops follow the Figma grid (3336:471), plus the featured
   // companies that weren't in it (using their featured photos).
-  // `exited` marks the company as Exited on its card.
+  // `exited` marks the company as Exited on its card; `url` links the card to
+  // the company's website (opens in a new tab). Cards without one aren't links.
   // `crop` = left/top/width/height in % of the thumbnail window.
   // Categories are a best-guess mapping: Figma doesn't define one.
   const C = (name, img, cats, extra = {}) => ({ name, img, cats, ...extra });
   const COMPANIES = [
-    C("10beauty", "grid/p0.jpg", ["Beauty & Personal Care"]),
-    C("alec’s ice cream", "grid/p1.jpg", ["Food & Beverage"]),
-    C("AYOH", "grid/p2.jpg", ["Food & Beverage"]),
-    C("BATH HOUSE", "grid/p3.jpg", ["Health & Wellness", "4-Wall"], { crop: [-24.52, -4.25, 144.54, 120.55] }),
-    C("BERO", "grid/p4.jpg", ["Food & Beverage"]),
-    C("BLACK CROW AI", "grid/p5.jpg", ["Software and Enablement"], { crop: [0, -5.23, 100, 187.5] }),
-    C("BUILDER", "grid/p6.jpg", ["Software and Enablement"]),
+    C("10beauty", "grid/p0.jpg", ["Beauty & Personal Care"], { url: "https://www.10beauty.co/" }),
+    C("alec’s ice cream", "grid/p1.jpg", ["Food & Beverage"], { url: "https://www.alecsicecream.com/" }),
+    C("AYOH", "grid/p2.jpg", ["Food & Beverage"], { url: "https://eatayoh.com/" }),
+    C("BATH HOUSE", "grid/p3.jpg", ["Health & Wellness", "4-Wall"], { url: "https://bathhouse.com/", crop: [-24.52, -4.25, 144.54, 120.55] }),
+    C("BERO", "grid/p4.jpg", ["Food & Beverage"], { url: "https://berobrewing.com/" }),
+    C("BLACK CROW AI", "grid/p5.jpg", ["Software and Enablement"], { url: "https://www.blackcrow.ai/", crop: [0, -5.23, 100, 187.5] }),
+    C("BUILDER", "grid/p6.jpg", ["Software and Enablement"], { url: "https://www.builder.io/" }),
     C("CAFETERIA", "grid/p7.jpg", ["Consumer Internet"]),
-    C("CANN", "grid/p8.jpg", ["Food & Beverage"]),
-    C("CEREBELLY", "grid/p9.jpg", ["Food & Beverage", "Health & Wellness"]),
-    C("DAILY HARVEST", "grid/p10.jpg", ["Food & Beverage"], { exited: true, crop: [-4.36, -4.6, 108.53, 109.12] }),
-    C("DAVID", "grid/p11.jpg", ["Food & Beverage", "Health & Wellness"], { crop: [-32.06, -72.29, 163.8, 292.5] }),
-    C("DUOS", "grid/p12.png", ["Health & Wellness"], { exited: true }),
-    C("EON", null, ["Software and Enablement"]),
-    C("FARFETCH", "grid/p13.jpg", ["Luxury", "Apparel & Accessories"], { exited: true }),
-    C("GENIUS AI", "grid/p14.jpg", ["Software and Enablement"]),
-    C("GLOSSIER", "grid/p15.png", ["Beauty & Personal Care"], { crop: [-3.12, -87.98, 100, 206.35] }),
-    C("GOOD AMERICAN", "grid/p16.jpg", ["Apparel & Accessories"]),
-    C("GOOSE HOLDINGS", "grid/p17.jpg", ["4-Wall"]),
-    C("HALF MAGIC", "grid/p18.jpg", ["Beauty & Personal Care"]),
-    C("HOOK MEDIA", "grid/p19.jpg", ["Consumer Internet"]),
-    C("HUM NUTRITION", "grid/p20.jpg", ["Health & Wellness"]),
-    C("KHY", "grid/p21.jpg", ["Apparel & Accessories"], { crop: [-3.94, -6.64, 107.87, 168.55] }),
-    C("KOREAN BROS", "grid/p22.jpg", ["Food & Beverage"], { crop: [-16.19, -10.29, 132.38, 120.57] }),
-    C("LORE", "grid/p23.jpg", ["Beauty & Personal Care"], { crop: [0, -34.52, 100, 156.25] }),
-    C("LUCKY BEVERAGE", "grid/p24.jpg", ["Food & Beverage"]),
-    C("MEJURI", "grid/p25.jpg", ["Apparel & Accessories", "Luxury"]),
-    C("MILÁ", "grid/p26.jpg", ["Food & Beverage"]),
+    C("CANN", "grid/p8.jpg", ["Food & Beverage"], { url: "https://drinkcann.com/" }),
+    C("CEREBELLY", "grid/p9.jpg", ["Food & Beverage", "Health & Wellness"], { url: "https://cerebelly.com/" }),
+    C("DAILY HARVEST", "grid/p10.jpg", ["Food & Beverage"], { url: "https://daily-harvest.com/", exited: true, crop: [-4.36, -4.6, 108.53, 109.12] }),
+    C("DAVID", "grid/p11.jpg", ["Food & Beverage", "Health & Wellness"], { url: "https://davidprotein.com/", crop: [-32.06, -72.29, 163.8, 292.5] }),
+    C("DUOS", "grid/p12.png", ["Health & Wellness"], { url: "https://www.getduos.com/", exited: true }),
+    C("EON", null, ["Software and Enablement"], { url: "https://eon.xyz/" }),
+    C("FARFETCH", "grid/p13.jpg", ["Luxury", "Apparel & Accessories"], { url: "https://www.farfetch.com/", exited: true }),
+    C("GENIUS AI", "grid/p14.jpg", ["Software and Enablement"], { url: "https://genius.ai/" }),
+    C("GLOSSIER", "grid/p15.png", ["Beauty & Personal Care"], { url: "https://www.glossier.com/", crop: [-3.12, -87.98, 100, 206.35] }),
+    C("GOOD AMERICAN", "grid/p16.jpg", ["Apparel & Accessories"], { url: "https://www.goodamerican.com/" }),
+    C("GOOSE HOLDINGS", "grid/p17.jpg", ["4-Wall"], { url: "https://www.goose.pet/" }),
+    C("HALF MAGIC", "grid/p18.jpg", ["Beauty & Personal Care"], { url: "https://halfmagicbeauty.com/" }),
+    C("HOOK MEDIA", "grid/p19.jpg", ["Consumer Internet"], { url: "https://www.hookmusic.com/" }),
+    C("HUM NUTRITION", "grid/p20.jpg", ["Health & Wellness"], { url: "https://www.humnutrition.com/" }),
+    C("KHY", "grid/p21.jpg", ["Apparel & Accessories"], { url: "https://www.khy.com/", crop: [-3.94, -6.64, 107.87, 168.55] }),
+    C("KOREAN BROS", "grid/p22.jpg", ["Food & Beverage"], { url: "https://koreanbros.shop/", crop: [-16.19, -10.29, 132.38, 120.57] }),
+    C("LORE", "grid/p23.jpg", ["Beauty & Personal Care"], { url: "https://lore.world/", crop: [0, -34.52, 100, 156.25] }),
+    C("LUCKY BEVERAGE", "grid/p24.jpg", ["Food & Beverage"], { url: "https://luckybevco.com/" }),
+    C("MEJURI", "grid/p25.jpg", ["Apparel & Accessories", "Luxury"], { url: "https://mejuri.com/" }),
+    C("MILÁ", "grid/p26.jpg", ["Food & Beverage"], { url: "https://eatmila.com/" }),
     C("nanos", "grid/p27.jpg", ["Pet"]),
-    C("NÉCESSAIRE", "grid/p28.jpg", ["Beauty & Personal Care"]),
-    C("NORDIC KNOTS", "grid/p29.png", ["Home"]),
-    C("NUORDER", "grid/p30.jpg", ["Software and Enablement"], { exited: true, crop: [-11.01, -17.2, 119.88, 117.37] }),
-    C("PEPPER (POMEGRANATE TECH)", "grid/p31.jpg", ["Software and Enablement"], { crop: [0.02, -7.93, 146.54, 117.75] }),
-    C("point of view", "grid/p32.jpg", ["Health & Wellness"]),
-    C("reale actives", "grid/p33.jpg", ["Beauty & Personal Care"], { crop: [-18.21, -14.73, 132.7, 124.6] }),
-    C("reformation", "grid/p34.jpg", ["Apparel & Accessories"], { exited: true }),
-    C("RETRO (LONE PALM LABS)", "grid/p35.png", ["Consumer Internet"]),
-    C("santo taco", "grid/p36.jpg", ["Food & Beverage", "4-Wall"]),
-    C("shiftsmart", "grid/p37.jpg", ["Software and Enablement"], { crop: [0, -0.64, 100, 109.52] }),
-    C("SKIMS", "grid/p38.png", ["Apparel & Accessories"]),
-    C("smalls", "grid/p39.jpg", ["Pet"]),
-    C("SUNDAYS", "grid/p40.jpg", ["Pet"]),
-    C("SWORL", "grid/p41.jpg", ["Food & Beverage"]),
-    C("thefeed.com", "grid/p42.jpg", ["Health & Wellness"]),
-    C("thirty madison (keeps)", "grid/p43.jpg", ["Health & Wellness"], { exited: true }),
-    C("universal standard", "grid/p44.jpg", ["Apparel & Accessories"]),
-    C("WESTMAN ATELIER", "grid/p45.jpg", ["Beauty & Personal Care"], { crop: [-3.97, -10.41, 108, 129.79] }),
+    C("NÉCESSAIRE", "grid/p28.jpg", ["Beauty & Personal Care"], { url: "https://necessaire.com/" }),
+    C("NORDIC KNOTS", "grid/p29.png", ["Home"], { url: "https://nordicknots.com/" }),
+    C("NUORDER", "grid/p30.jpg", ["Software and Enablement"], { url: "https://www.nuorder.com/", exited: true, crop: [-11.01, -17.2, 119.88, 117.37] }),
+    C("PEPPER (POMEGRANATE TECH)", "grid/p31.jpg", ["Software and Enablement"], { url: "https://www.usepepper.com/", crop: [0.02, -7.93, 146.54, 117.75] }),
+    C("point of view", "grid/p32.jpg", ["Health & Wellness"], { url: "https://povbeauty.com/" }),
+    C("reale actives", "grid/p33.jpg", ["Beauty & Personal Care"], { url: "https://realeactives.com/", crop: [-18.21, -14.73, 132.7, 124.6] }),
+    C("reformation", "grid/p34.jpg", ["Apparel & Accessories"], { url: "https://www.thereformation.com/", exited: true }),
+    C("RETRO (LONE PALM LABS)", "grid/p35.png", ["Consumer Internet"], { url: "https://retro.app/" }),
+    C("santo taco", "grid/p36.jpg", ["Food & Beverage", "4-Wall"], { url: "https://www.eatsantotaco.com/" }),
+    C("shiftsmart", "grid/p37.jpg", ["Software and Enablement"], { url: "https://shiftsmart.com/", crop: [0, -0.64, 100, 109.52] }),
+    C("SKIMS", "grid/p38.png", ["Apparel & Accessories"], { url: "https://skims.com/" }),
+    C("smalls", "grid/p39.jpg", ["Pet"], { url: "https://www.smalls.com/" }),
+    C("SUNDAYS", "grid/p40.jpg", ["Pet"], { url: "https://sundaysfordogs.com/" }),
+    C("SWORL", "grid/p41.jpg", ["Food & Beverage"], { url: "https://www.sworl.com/" }),
+    C("thefeed.com", "grid/p42.jpg", ["Health & Wellness"], { url: "https://thefeed.com/" }),
+    C("thirty madison (keeps)", "grid/p43.jpg", ["Health & Wellness"], { url: "https://thirtymadison.com/", exited: true }),
+    C("universal standard", "grid/p44.jpg", ["Apparel & Accessories"], { url: "https://www.universalstandard.com/" }),
+    C("WESTMAN ATELIER", "grid/p45.jpg", ["Beauty & Personal Care"], { url: "https://www.westman-atelier.com/", crop: [-3.97, -10.41, 108, 129.79] }),
   ];
 
   // Version B shows the companies as full-bleed tiles with the logo over the photo.
   // Logo files (assets/logos/tiles) are black on transparent and shown white by CSS;
-  // `ar` corrects the few source files that are stored stretched.
+  // `ar` corrects a source file stored stretched; `asis` keeps a logo's own
+  // colours (Korean Bros: white-filled lettering with black outlines);
+  // `scale` enlarges a logo beyond the default size.
   const LOGOS = {
     "10beauty": "10beauty.svg",
     "alec’s ice cream": "alecs.png",
@@ -97,7 +100,7 @@
     "HOOK MEDIA": "hook-media.svg",
     "HUM NUTRITION": "hum.png",
     "KHY": "khy.svg",
-    "KOREAN BROS": "korean-bros.png",
+    "KOREAN BROS": { src: "korean-bros-filled.png", asis: true, scale: 1.3 },
     "LORE": "lore.svg",
     "LUCKY BEVERAGE": "lucky-beverage.png",
     "MEJURI": "mejuri.png",
@@ -107,7 +110,7 @@
     "NORDIC KNOTS": "nordic.png",
     "NUORDER": "nuorder.svg",
     "PEPPER (POMEGRANATE TECH)": "pepper.svg",
-    "point of view": { src: "pov.png", ar: 6.21 },
+    "point of view": "pov.svg",
     "reale actives": "reale.png",
     "reformation": "reformation.svg",
     "RETRO (LONE PALM LABS)": "retro.png",
@@ -117,7 +120,7 @@
     "smalls": "smalls.svg",
     "SUNDAYS": "sundays.png",
     "SWORL": "sworl.svg",
-    "thefeed.com": { src: "thefeed.png", ar: 5.1 },
+    "thefeed.com": "thefeed.svg",
     "thirty madison (keeps)": "keeps.svg",
     "universal standard": "universal-standard.svg",
     "WESTMAN ATELIER": "westman.png",
@@ -126,10 +129,9 @@
 
   const grid = document.querySelector(".p-grid");
   const list = document.querySelector(".p-list");
-  // the Category bar: its own section above the featured strips in
+  // the Category bar: its own section after the featured strips in
   // version B, inside the list in version A
   const bar = document.querySelector(".p-filterbar") || list;
-  const featured = document.querySelector(".p-featured");
   const reduce = window.Imaginary?.reduceMotion;
   const esc = (s) => s.replace(/&/g, "&amp;");
   // grid images live in assets/grid (from Figma 3336:471)
@@ -152,17 +154,19 @@
       const l = LOGOS[co.name];
       const logo = typeof l === "string" ? { src: l } : l;
       mark = logo
-        ? `<div class="p-card__logo"${logo.ar ? ` data-ar="${logo.ar}"` : ""}><img src="assets/logos/tiles/${logo.src}" alt="${esc(co.name)}" decoding="async"></div>`
+        ? `<div class="p-card__logo${logo.asis ? " p-card__logo--asis" : ""}"${logo.ar ? ` data-ar="${logo.ar}"` : ""}${logo.scale ? ` data-scale="${logo.scale}"` : ""}><img src="assets/logos/tiles/${logo.src}" alt="${esc(co.name)}" decoding="async"></div>`
         : `<p class="p-card__wordmark">${esc(co.name)}</p>`;
       // version B: a small diagonal ribbon in the corner of exited companies
       if (co.exited) mark += '<span class="p-card__ribbon">Exited</span>';
     }
     // version A: a grey "Exited" line under the name
     const status = !stacked && co.exited ? '<p class="p-card__status">Exited</p>' : "";
-    return `<article class="p-card" data-i="${i}">
+    const tag = co.url ? "a" : "article";
+    const link = co.url ? ` href="${co.url}" target="_blank" rel="noopener"` : "";
+    return `<${tag} class="p-card" data-i="${i}"${link}>
       <div class="p-card__thumb">${img}${mark}</div>
       <p class="p-card__name">${esc(co.name)}</p>${status}
-    </article>`;
+    </${tag}>`;
   }).join("") + '<p class="p-empty" hidden>No companies match these filters yet</p>';
   const cards = [...grid.querySelectorAll(".p-card")];
 
@@ -172,7 +176,7 @@
     const im = box.querySelector("img");
     const ar = +box.dataset.ar || im.naturalWidth / im.naturalHeight;
     if (!ar) return;
-    const w = Math.min(15, 4.4 * Math.sqrt(ar));
+    const w = Math.min(15, 4.4 * Math.sqrt(ar) * (+box.dataset.scale || 1));
     box.style.width = `${w}rem`;
     box.style.height = `${w / ar}rem`;
   };
@@ -247,8 +251,6 @@
       }
     });
     empty.hidden = shown > 0;
-    // version B: while a filter is set, the matching tiles follow the bar directly
-    if (bar !== list && featured) featured.hidden = !!filter.category;
 
     // if the filters have scrolled away, bring them back into view
     const top = bar.getBoundingClientRect().top;

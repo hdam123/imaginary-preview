@@ -485,7 +485,7 @@ html.is-leaving .page { opacity: 0; transition: opacity 0.35s ease; }
 .p-intro .intro__text { top: 11rem; left: 4.8092rem; width: 35.3816rem; }
 
 /* Featured companies — seven full-width strips */
-.feature { position: relative; height: 15rem; overflow: hidden; background: #fff; }
+.feature { display: block; position: relative; height: 15rem; overflow: hidden; background: #fff; }
 .feature--red { background: #bf5252; }
 .feature--deep { background: #974242; }
 .feature__media { position: absolute; overflow: hidden; margin-top: -2.5rem; }   /* crops were set for 20rem strips: keep them centred in 15rem */
