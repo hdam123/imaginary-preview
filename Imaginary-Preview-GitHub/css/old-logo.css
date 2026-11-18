@@ -39,7 +39,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.18);
+  background: rgba(0, 0, 0, var(--scrim, 0.18));  /* a card can ask for a darker one */
 }
 .p-card__logo {
   position: absolute;

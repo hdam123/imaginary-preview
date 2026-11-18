@@ -34,12 +34,13 @@
     C("CANN", "grid/p8.jpg", ["Food & Beverage"], { url: "https://drinkcann.com/" }),
     C("CEREBELLY", "grid/p9.jpg", ["Food & Beverage", "Health & Wellness"], { url: "https://cerebelly.com/" }),
     C("DAILY HARVEST", "grid/p10.jpg", ["Food & Beverage"], { url: "https://daily-harvest.com/", exited: true, crop: [-4.36, -4.6, 108.53, 109.12] }),
+    C("DANIELLE FRANKEL", "grid/p48.jpg", ["Apparel & Accessories", "Luxury"], { url: "https://www.daniellefrankelstudio.com/", scrim: 0.4 }),
     C("DAVID", "grid/p11.jpg", ["Food & Beverage", "Health & Wellness"], { url: "https://davidprotein.com/", crop: [-32.06, -72.29, 163.8, 292.5] }),
     C("DUOS", "grid/p12.png", ["Health & Wellness"], { url: "https://www.getduos.com/", exited: true }),
     C("EON", "grid/p46.jpg", ["Software and Enablement"], { url: "https://eon.xyz/" }),
     C("FARFETCH", "grid/p13b.jpg", ["Luxury", "Apparel & Accessories"], { url: "https://www.farfetch.com/", exited: true }),
     C("GENIUS AI", "grid/p14.jpg", ["Software and Enablement"], { url: "https://genius.ai/" }),
-    C("GLOSSIER", "grid/p15.png", ["Beauty & Personal Care"], { url: "https://www.glossier.com/", crop: [-3.12, -87.98, 100, 206.35] }),
+    C("GLOSSIER", "grid/p15.png", ["Beauty & Personal Care"], { url: "https://www.glossier.com/", crop: [-3.12, -90.46, 106.24, 211.3] }),
     C("GOOD AMERICAN", "grid/p16.jpg", ["Apparel & Accessories"], { url: "https://www.goodamerican.com/" }),
     C("GOOSE HOLDINGS", "grid/p17.jpg", ["4-Wall"], { url: "https://www.goose.pet/" }),
     C("HALF MAGIC", "grid/p18.jpg", ["Beauty & Personal Care"], { url: "https://halfmagicbeauty.com/" }),
@@ -47,6 +48,7 @@
     C("HUM NUTRITION", "grid/p20.jpg", ["Health & Wellness"], { url: "https://www.humnutrition.com/" }),
     C("KHY", "grid/p21.jpg", ["Apparel & Accessories"], { url: "https://www.khy.com/", crop: [-3.94, -6.64, 107.87, 168.55] }),
     C("KOREAN BROS", "grid/p22.jpg", ["Food & Beverage"], { url: "https://koreanbros.shop/", crop: [-16.19, -10.29, 132.38, 120.57] }),
+    C("KOSAS", "grid/p49.jpg", ["Beauty & Personal Care"], { url: "https://kosas.com/", scrim: 0.4 }),
     C("LORE", "grid/p23.jpg", ["Beauty & Personal Care"], { url: "https://lore.world/", crop: [0, -34.52, 100, 156.25] }),
     C("LUCKY BEVERAGE", "grid/p24.jpg", ["Food & Beverage"], { url: "https://luckybevco.com/" }),
     C("MEJURI", "grid/p25.jpg", ["Apparel & Accessories", "Luxury"], { url: "https://mejuri.com/" }),
@@ -68,6 +70,7 @@
     C("SWORL", "grid/p41.jpg", ["Food & Beverage"], { url: "https://www.sworl.com/" }),
     C("thefeed.com", "grid/p42.jpg", ["Health & Wellness"], { url: "https://thefeed.com/" }),
     C("thirty madison (keeps)", "grid/p43.jpg", ["Health & Wellness"], { url: "https://thirtymadison.com/", exited: true }),
+    C("TIN CAN", "grid/p47.jpg", ["Consumer Internet"], { url: "https://tincan.kids/" }),
     C("universal standard", "grid/p44.jpg", ["Apparel & Accessories"], { url: "https://www.universalstandard.com/" }),
     C("WESTMAN ATELIER", "grid/p45.jpg", ["Beauty & Personal Care"], { url: "https://www.westman-atelier.com/", crop: [-3.97, -10.41, 108, 129.79] }),
   ];
@@ -89,6 +92,7 @@
     "CANN": { src: "cann.png", scale: 1.2 },
     "CEREBELLY": "cerebelly.svg",
     "DAILY HARVEST": "daily-harvest.svg",
+    "DANIELLE FRANKEL": "danielle-frankel.png",
     "DAVID": "david.png",
     "DUOS": "duos.png",
     "EON": "eon.svg",
@@ -102,6 +106,7 @@
     "HUM NUTRITION": "hum.png",
     "KHY": "khy.svg",
     "KOREAN BROS": { src: "korean-bros-filled.png", asis: true, scale: 1.3 },
+    "KOSAS": "kosas.png",
     "LORE": "lore.svg",
     "LUCKY BEVERAGE": "lucky-beverage.png",
     "MEJURI": "mejuri.png",
@@ -123,6 +128,7 @@
     "SWORL": "sworl.svg",
     "thefeed.com": "thefeed.svg",
     "thirty madison (keeps)": "keeps.svg",
+    "TIN CAN": "tincan.png",
     "universal standard": "universal-standard.svg",
     "WESTMAN ATELIER": "westman.png",
   };
@@ -164,7 +170,7 @@
     const status = !stacked && co.exited ? '<p class="p-card__status">Exited</p>' : "";
     const tag = co.url ? "a" : "article";
     const link = co.url ? ` href="${co.url}" target="_blank" rel="noopener"` : "";
-    return `<${tag} class="p-card" data-i="${i}"${link}>
+    return `<${tag} class="p-card" data-i="${i}"${co.scrim ? ` style="--scrim:${co.scrim}"` : ""}${link}>
       <div class="p-card__thumb">${img}${mark}</div>
       <p class="p-card__name">${esc(co.name)}</p>${status}
     </${tag}>`;
